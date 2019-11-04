@@ -1,0 +1,394 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Audio samples from "WHAT DOES A NETWORK LAYER HEAR? ANALYZING HIDDEN REPRESENTATIONS OF END-TO-END ASR THROUGH SPEECH SYNTHESIS"</title>
+    <!-- <link rel="stylesheet" type="text/css" href="../../stylesheet.css" /> -->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <style>
+        .audio-cell {
+            /* Center audio widgets in the table cell. */
+            text-align: center;
+            padding-bottom: 1px;
+            padding-top: 1px;
+        }
+        
+        .audio-header {
+            /* Don't wrap header text. */
+            white-space: nowrap;
+            /* Some breaking space between headers for readability. */
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+        
+        .sample audio {
+            vertical-align: middle;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+        
+        .round-button {
+            box-sizing: border-box;
+            display: block;
+            width: 30px;
+            height: 30px;
+            padding-top: 8px;
+            padding-left: 3px;
+            line-height: 6px;
+            border: 1.2px solid #000;
+            border-radius: 50%;
+            color: #000;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.00);
+            font-size: 6px;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+            transition: all 0.2s ease;
+        }
+        
+        .round-button:hover {
+            background-color: rgba(0, 0, 0, 0.0);
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 1);
+        }
+        
+        .round-button:active {
+            background-color: rgba(0, 0, 0, 0.01);
+            box-shadow: 0px 0px 1px rgba(0, 0, 0, 1);
+        }
+
+        .center-fit {
+            max-width: 100%;
+            max-height: 100vh;
+            margin: auto;
+        }
+
+        #player {
+            position: fixed;
+            top: 0;
+            right: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <audio controls="" id="player"></audio>
+    <article>
+        <header>
+            <h1>Audio samples from "WHAT DOES A NETWORK LAYER HEAR? </br> ANALYZING HIDDEN REPRESENTATIONS OF END-TO-END ASR THROUGH SPEECH SYNTHESIS"</h1>
+        </header>
+    </article>
+    <div>
+        <p><b>Paper:</b> <a href="https://arxiv.org/">arXiv</a></p>
+    </div>
+    <div>
+        <p><b>Authors:</b> Chung-Yi Li, Pei-Chieh Yuan, and Hung-Yi Lee</p>
+    </div>
+    <div>
+        <p><b>Abstract:</b>
+            End-to-end speech recognition systems have achieved competitive results compared to traditional systems. 
+            However, the complex transformations involved between layers given highly variable acoustic signals are hard to analyze. 
+            In this paper, we present our ASR probing model, which synthesizes speech from hidden representations of end-to-end ASR to examine the information maintain after each layer calculation. 
+            Listening to the synthesized speech, we observe gradual removal of speaker variability and noise as the layer goes deeper, which aligns with the previous studies on how deep network functions in speech recognition. 
+            This paper is the first study analyzing the end-to-end speech recognition model by demonstrating what each layer hears. 
+            Speaker verification and speech enhancement measurements on synthesized speech are also conducted to confirm our observation further.
+        </p>
+    </div>
+    <p>This page show some audio samples in support of paper: we suggest that the reader listen to the samples along with reading the paper.
+        <b>All utterances were unseen during training.</b></p>
+
+    <!--
+    <p class="toc_title">Contents</p>
+    <div id="toc_container">
+        <ul>
+            <li><a href="#in-domain:-lessac-<-5sec"> 1. In-Domain: Lessac &lt; 5sec
+            <li><a href="#in-domain:-lj-<-10sec"> 2. In-Domain: LJ &lt; 10sec
+            <li><a href="#generalization-to-long-utterances"> 3. Generalization to Long Utterances
+        </ul>
+    </div>
+    -->
+
+    <a name="demo"><h2>1. Demo</h2></a>
+    <p>
+        The following examples are from models trained on the 100 hours LibriSpeech dataset. 
+        The test utterances are taken from the mixture of the test-clean set of LibriSpeech and the noise of MUSAN.
+        The reader can select the mixture of 8 speech utterances and 4 kinds of noise in the two menus.
+    </p>
+
+    <table>
+        <thead>
+            <th style="width:150px">
+                <label for="speech-select">Choose speech:</label>
+                </br>
+                <select style="width:100px; height:30px" name="speech" id="speech-select">
+                    <option selected value=1>Speech 1</option>
+                    <option value=2>Speech 2</option>
+                    <option value=3>Speech 3</option>
+                    <option value=4>Speech 4</option>
+                    <option value=5>Speech 5</option>
+                    <option value=6>Speech 6</option>
+                    <option value=7>Speech 7</option>
+                    <option value=8>Speech 8</option>
+                </select>
+            </th>
+            <th style="width:150px">
+                <label for="noise-select">Choose noise:</label>
+                </br>
+                <select style="width:100px; height:30px" name="noise" id="noise-select">
+                    <option selected value=0>None</option>
+                    <option value=1>Noise 1</option>
+                    <option value=2>Noise 2</option>
+                    <option value=3>Noise 3</option>
+                    <option value=4>Noise 4</option>
+                </select>
+            </th>
+            <th style="width:100px">Mixture</th>
+            <th style="text-align:left; width:500px">Text</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="audio-cell">
+                    <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/gt/', 'speech')"><i class="fa fa-play fa-2x"></i></div>
+                </td>
+                <td class="audio-cell">
+                    <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/gt/', 'noise')"><i class="fa fa-play fa-2x"></i></div>
+                </td>
+                <td class="audio-cell">
+                    <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/gt/')"><i class="fa fa-play fa-2x"></i></div>
+                </td>
+                <td style="width:500px" id="speech-text">And the old gentleman was so delighted with his success that he had to burst out into a series of short happy bits of laughter that occupied quite a space of time.</td>
+            </tr>
+        </tbody>
+    </table>
+    </br>
+    
+    <table>
+        <tr>
+            <!--<td class="reference-cell">-->
+            <td>
+                <!--</br><span class="text_e2e">VGG-LSTM</span>-->
+                VGG-LSTM
+            </td>
+            <td>
+
+                <table>
+                    <thead>
+                        <th></th>
+                        <th class="audio-header" style="width:100px">Noise-Robust</th>
+                        <th class="audio-header" style="width:100px">Baseline</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="audio-header">Layer1 - cnn1</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/robust/0/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/baseline/0/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="audio-header">Layer5 - cnn2</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/robust/4/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/baseline/4/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="audio-header">Layer10 - cnn4</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/robust/9/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/baseline/9/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="audio-header">Layer11 - blstm1</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/robust/10/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/baseline/10/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="audio-header">Layer13 - blstm3</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/robust/12/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/baseline/12/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="audio-header">Layer15 - blstm5</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/robust/14/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/vgg-lstm/baseline/14/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </td>
+
+            <td> &emsp; </td>
+
+            <!--<td class="reference-cell">-->
+            <td>
+                <!--</br><span class="text_e2e">VGG-LSTM</span>-->
+                pure-LSTM
+            </td>
+            <td>
+
+                <table>
+                    <thead>
+                        <th></th>
+                        <th class="audio-header" style="width:100px">Noise-Robust</th>
+                        <th class="audio-header" style="width:100px">Baseline</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="audio-header">Layer1 - blstm1</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/pure-lstm/robust/0/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/pure-lstm/baseline/0/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="audio-header">Layer3 - blstm2</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/pure-lstm/robust/1/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/pure-lstm/baseline/1/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="audio-header">Layer5 - blstm3</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/pure-lstm/robust/2/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/pure-lstm/baseline/2/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="audio-header">Layer7 - blstm4</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/pure-lstm/robust/3/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/pure-lstm/baseline/3/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="audio-header">Layer8 - blstm5</th>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/pure-lstm/robust/4/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                            <td class="audio-cell">
+                                <div class="round-button" style="display: inline-block;" onclick="play('./wav/demo/pure-lstm/baseline/4/')"><i class="fa fa-play fa-2x"></i></div>
+                            </td>
+                        </tr>
+                        <tr></tr>
+                    </tbody>
+                </table>
+
+            </td>
+            
+        </tr>
+    </table>
+
+    <a name="model-architecture"><h2>2. Model Architecture</h2></a>
+    
+    <h3>Pure-LSTM ASR Model</h3>
+    <img class="center-fit" style="width: 900px" src='images/pure-LSTM.png'>
+    <h3>VGG-LSTM ASR Model</h3>
+    <img class="center-fit" style="width: 900px" src='images/VGG-LSTM.png'>
+    <h3>Probing Model (Reconstruction Model)</h3>
+    <img class="center-fit" style="width: 600px" src='images/reconstruct.png'>
+    <!--<img src="images/pure-LSTM.png" />-->
+</body>
+
+<script>
+    var speechId = 1;
+    var noiseId = 0;
+    var speechDropdown = document.getElementById("speech-select");
+    var noiseDropdown = document.getElementById("noise-select");
+    var speechText = document.getElementById("speech-text");
+
+    speechDropdown.onchange = function(){
+        var selected = this.options[this.selectedIndex].value;
+        speechId = selected;
+        if (speechId == 1) {
+            speechText.innerText = "And the old gentleman was so delighted with his success that he had to burst out into a series of short happy bits of laughter that occupied quite a space of time.";
+        }
+        else if (speechId == 2) {
+            speechText.innerText = "The wearers of uniforms and liveries may be roughly divided into two classes the free and the servile or the noble and the ignoble.";
+        }
+        else if (speechId == 3) {
+            speechText.innerText = "He gave way to the others very readily and retreated unperceived by the squire and mistress fitzooth to the rear of the tent.";
+        }
+        else if (speechId == 4) {
+            speechText.innerText = "After early nightfall the yellow lamps would light up here and there the squalid quarter of the brothels.";
+        }
+        else if (speechId == 5) {
+            speechText.innerText = "Housecleaning a domestic upheaval that makes it easy for the government to enlist all the soldiers it needs.";
+        }
+        else if (speechId == 6) {
+            speechText.innerText = "As he had promised to protect the hotel the reassured citizens began to laugh at their own fears.";
+        }
+        else if (speechId == 7) {
+            speechText.innerText = "Then he rushed down stairs into the courtyard shouting loudly for his soldiers and threatening to patch everybody in his dominions if the ailorman was not recaptured.";
+        }
+        else if (speechId == 8) {
+            speechText.innerText = "Yes then something better something still grander will surely follow or wherefore should they thus ornament me.";
+        }
+        else {
+            console.log("Speech id not exist.")
+        }
+    };
+    noiseDropdown.onchange = function(){
+        var selected = this.options[this.selectedIndex].value;
+        noiseId = selected;
+    };
+
+    function play(path, type="mixture") {
+        {
+            var player = document.getElementById('player');
+            var fileId = 0;
+            var filePath = "";
+            if (type === "speech") {
+                fileId = speechId;
+                filePath = path + fileId.toString() + ".flac";
+            }
+            else if (type === "noise") {
+                fileId = noiseId;
+                filePath = path + fileId.toString() + ".wav";
+            }
+            else {
+                fileId = speechId + noiseId;
+                filePath = path + fileId.toString() + ".flac";
+            }
+
+            if (fileId > 0) {
+                console.log(fileId);
+                player.src = filePath;
+                player.play();
+            }
+            else {
+                console.log("File id %s not exist.", fileId)
+            }
+        }
+    };
+</script>
+
+</html>
